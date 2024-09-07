@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture3.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<style TYPE="text/css">
+code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+</style>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+    }
+});
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<h1 id="lecture-3---interview-techniques--testing-and-defensive-programming">Lecture 3 - Interview Techniques / Testing and Defensive Programming</h1>
+<h2 id="interview-techniques">Interview Techniques</h2>
+<h3 id="interviewee">Interviewee</h3>
+<ul>
+<li>
+<p>Understand the problem</p>
+<ul>
+<li>Resolve any ambiguities</li>
+<li>Ask for clarifications of data types, resource limits, error handling, ...</li>
+</ul>
+</li>
+<li>
+<p>Talk out the problem</p>
+<ul>
+<li>Thought process</li>
+<li>Pros and cons of multiple approaches</li>
+</ul>
+</li>
+</ul>
+<h3 id="interviewer">Interviewer</h3>
+<ul>
+<li>
+<p>Give the questions in the order assigned</p>
+</li>
+<li>
+<p>State the question clearly and concisely</p>
+<ul>
+<li>Interviewee is supposed to ask for clarifications</li>
+</ul>
+</li>
+<li>
+<p>Give hints if stuck</p>
+<ul>
+<li>Ask interviewee to think about alternative approaches</li>
+<li>Give a <em>small</em> piece of the solution</li>
+</ul>
+</li>
+<li>
+<p>Watch the time</p>
+<ul>
+<li>Do not start on a new question if near the <em>lower</em> time limit</li>
+<li>Speed along the current question if neaar the <em>higher</em> time limit
+<ul>
+<li>Give more hints</li>
+<li>Ask about the portions completed</li>
+<li>Skip the actual coding on second/third questions; Assign N/A for</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="interviewee-rubrics">Interviewee Rubrics</h3>
+<table>
+<thead>
+<tr>
+<th>Question-Specific</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Did the student state the assumptions they are making about the problem and design of the solution verbally or in writing, including drawing diagrams as appropriate?</td>
+</tr>
+<tr>
+<td>Did the student “talk-out” (verbally express) their thought process as they were implementing the solution?</td>
+</tr>
+<tr>
+<td>Ask the student to explain why some portion of their code is important to solving the problem. Are they able to provide a brief, understandable, and compelling explanation?</td>
+</tr>
+<tr>
+<td>Were the solutions syntactically correct for Java (7/8), Python, or Javascript, as appropriate?</td>
+</tr>
+<tr>
+<td>Ask for an explanation of the solution they provide and why they think it is best. How well is the student able to explain it to you?</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Entire Interview</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Was the student attentive and focused on the interview?</td>
+</tr>
+<tr>
+<td>How knowledgeable or confident did the student appear to you?</td>
+</tr>
+<tr>
+<td>Was the student polite and amiable? (5 = exellent to 0 = poor)</td>
+</tr>
+<tr>
+<td>Did the student seem like they would be a good team player? (i.e. were they willing to explore alternative suggestions?)</td>
+</tr>
+<tr>
+<td>How many hints did the student need over the entire interview? (5 = none, 4 = one or two, 3 = 3-4, 2 = 5-6, 1 = more than six)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="testing-and-defensive-programming">Testing and Defensive Programming</h2>
+<h3 id="testing">Testing</h3>
+<ul>
+<li>Make the program work when programming</li>
+<li>Make the code FAIL when testing
+<ul>
+<li>Think of unusual or unexpected inputs</li>
+</ul>
+</li>
+</ul>
+<h3 id="unit-testing">Unit Testing</h3>
+<ul>
+<li><strong>Unit testing</strong> is the process of writing automated tests to verify that individual pieces (units) of code, such as functions or methods, work correctly in isolation.</li>
+</ul>
+<h3 id="boundary-conditions--edge-cases">Boundary Conditions / Edge Cases</h3>
+<ul>
+<li>
+<p>Extremes</p>
+<ul>
+<li>Empty input</li>
+<li>Extremely large input</li>
+<li>Smallest valid value</li>
+<li>Largest valid value</li>
+</ul>
+</li>
+<li>
+<p>Error conditions</p>
+<ul>
+<li>Division by zero</li>
+<li>Overflow</li>
+<li>Array index out of bound</li>
+</ul>
+</li>
+</ul>
+<h3 id="black-box-testing--white-box-testing">Black Box Testing &amp; White Box Testing</h3>
+<ul>
+<li>Black Box Testing: Only sees inputs and expected outputs, internal code is hidden.</li>
+<li>White Box Testing: Can see internal code, logic, and structure, along with inputs and outputs.</li>
+</ul>
+<hr>
+<h3 id="defensive-programming">Defensive Programming</h3>
+<ul>
+<li>
+<p><strong>Defensive programming</strong> involves writing code that actively prevents errors during runtime by anticipating and handling unexpected conditions.</p>
+<ol>
+<li>
+<p><strong>Check inputs</strong></p>
+<ul>
+<li>Numbers: valid range?<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">factorial</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>; <span class="hljs-comment">// What if `n &lt; 1`?</span>
+    <span class="hljs-keyword">return</span> n * factorial(n-<span class="hljs-number">1</span>);
+}
+</div></code></pre>
+</li>
+<li>Strings and Arrays: empty?</li>
+<li>Objects: null?<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inorderTrav</span><span class="hljs-params">(Node root)</span> </span>{
+    inorderTrav(root.left); <span class="hljs-comment">// What if `root == null`?</span>
+    System.out.println(root.v);
+    inorderTrav(root.right);
+}
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Check intermediate results</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">funcA</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> value = funcB(); <span class="hljs-comment">// What if funcB fails? What if funcB returns value not valid?</span>
+    ...
+}
+</div></code></pre>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="the-robustness-principle">The Robustness Principle</h3>
+<p><strong>The Robustness Principle</strong>, a.k.a. Postel's Law, is a design guideline for software and systems, particularly in networking, which states:</p>
+<pre><code>&quot;Be conservative in what you send, be liberal in what you accept.&quot;
+</code></pre>
+<ul>
+<li>
+<p>When generating output (e.g., sending data), adhere strictly to protocol or specification to avoid creating ambiguous or invalid data that might cause errors for other systems or software.</p>
+</li>
+<li>
+<p>When receiving input, be tolerant and flexible, gracefully handle imperfect or unexpected input to avoid crashing or malfunctioning.row-major</p>
+</li>
+</ul>
+<h3 id="2d-array-performance-in-java">2D Array Performance in Java</h3>
+<ul>
+<li>
+<p>Java arrays are stored in a <strong>row-major</strong> order, meaning that the elements in each row are stored sequentially in memory.</p>
+<ul>
+<li>
+<p>Efficient (row-major)</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] row : a) {          <span class="hljs-comment">// Iterates through each row</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> element : row) {  <span class="hljs-comment">// Iterates through each element in the row</span>
+        ...
+    }
+}
+</div></code></pre>
+</li>
+<li>
+<p>Inefficient (column-major)</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> col = <span class="hljs-number">0</span>; col &lt; numCols; col++) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> row = <span class="hljs-number">0</span>; row &lt; numRows; row++) {
+        <span class="hljs-keyword">int</span> element = array[row][col];
+        <span class="hljs-comment">// Do something with element</span>
+    }
+}
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="multi-threading">Multi-Threading</h2>
+<ul>
+<li>
+<p><strong>Race condition</strong>: occurs when two or more threads access shared data or resources concurrently, and the outcome of the execution depends on the sequence or timing of these threads.</p>
+</li>
+<li>
+<p>Fixing data races</p>
+<ul>
+<li>
+<p>The <code>volatile</code> keyword ensures that the value of a variable is always read from and written to main memory, rather than being cached in the thread’s local memory (cache).</p>
+<ul>
+<li>Ensures visibility</li>
+</ul>
+</li>
+<li>
+<p>The <code>synchronized</code> keyword enforces mutual exclusion, ensuring that only one thread can access a critical section of code (such as a method or block) at a time.</p>
+<ul>
+<li>Ensures atomicity</li>
+</ul>
+</li>
+<li>
+<p>Both <code>volatile</code> and <code>synchronized</code> slow down the program; Use when neccessary to ensure correctness</p>
+<ul>
+<li><code>volatile</code> prevents various optimizations, forces memory accesses</li>
+<li><code>synchronized</code> prevents parallelism on multi-core machines</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><a href="../index.html">Back to Home</a>
+<a href="./lecture4.html">Next Lecture</a></p>
+
+</body>
+</html>
