@@ -20,7 +20,7 @@ MathJax.Hub.Queue(function() {
 
 # Lecture 2 - Computational Complexity / Parsing and String Manipulation
 
-- Additional resources can be found [here](https://billlidc.github.io/Data-Structures/lectures/lecture1.html).
+Additional resources can be found [here](https://billlidc.github.io/Data-Structures/lectures/lecture1.html).
 
 
 ---
