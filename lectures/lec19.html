@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lec19.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-19---javascript-syntax">Lecture 19 - JavaScript Syntax</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#history">History</a></li>
+<li><a href="#differences-between-java-and-javascript">Differences Between Java and JavaScript</a></li>
+<li><a href="#similarities-between-java-and-javascript">Similarities Between Java and JavaScript</a></li>
+<li><a href="#object-models">Object Models</a></li>
+<li><a href="#javascript-usage-paradigms">JavaScript Usage Paradigms</a></li>
+<li><a href="#document-object-model-dom">Document Object Model (DOM)</a></li>
+<li><a href="#variable-typing">Variable Typing</a></li>
+<li><a href="#native-primitive-types">Native Primitive Types</a></li>
+<li><a href="#native-classobject-types">Native Class/Object Types</a></li>
+<li><a href="#primitive-vs-object-types-in-javascript">Primitive vs. Object Types in JavaScript</a></li>
+<li><a href="#special-pointers">Special Pointers</a></li>
+<li><a href="#strong-vs-weak-typing">Strong vs. Weak Typing</a></li>
+<li><a href="#block-scoping">Block Scoping</a></li>
+<li><a href="#variable-declarations-and-scoping">Variable Declarations and Scoping</a></li>
+<li><a href="#determining-the-type-of-a-variable">Determining the Type of a Variable</a></li>
+<li><a href="#library-import">Library Import</a></li>
+<li><a href="#equality-tests">Equality Tests</a></li>
+<li><a href="#function-declaration">Function Declaration</a></li>
+<li><a href="#class-declaration">Class Declaration</a></li>
+<li><a href="#accessing-class-members">Accessing Class Members</a></li>
+<li><a href="#exception-handling">Exception Handling</a></li>
+<li><a href="#flow-control">Flow Control</a></li>
+<li><a href="#python-like-features">Python-Like Features</a></li>
+<li><a href="#strings-in-javascript">Strings in JavaScript</a></li>
+<li><a href="#type-conversions">Type Conversions</a></li>
+<li><a href="#implicit-type-conversion--to-boolean">Implicit Type Conversion – To Boolean</a></li>
+<li><a href="#javascript-arithmetic-operators">JavaScript Arithmetic Operators</a></li>
+<li><a href="#javascript-mutation-operators">JavaScript Mutation Operators</a></li>
+<li><a href="#javascript-bitwise-operators">JavaScript Bitwise Operators</a></li>
+<li><a href="#javascript-comparison-operators">JavaScript Comparison Operators</a></li>
+<li><a href="#javascript-boolean-operators">JavaScript Boolean Operators</a></li>
+<li><a href="#defining-functions">Defining Functions</a></li>
+</ul>
+<h2 id="history">History</h2>
+<ul>
+<li>Originally designed for the Netscape browser.</li>
+<li><em>JavaScript</em> is marginally related to <em>Java</em>:
+<ul>
+<li>Created when Sun Microsystems (developer of Java) collaborated with Netscape.</li>
+<li>Originally called &quot;<em>Mocha</em>&quot;, later renamed <em>JavaScript</em> as a <strong>marketing strategy</strong> to leverage <em>Java</em>'s popularity.</li>
+</ul>
+</li>
+<li><strong>Standardized version</strong> of <em>JavaScript</em> is called <em>ECMAScript</em>:
+<ul>
+<li>Named by the European Computer Manufacturer's Association (ECMA).</li>
+</ul>
+</li>
+</ul>
+<h2 id="differences-between-java-and-javascript">Differences Between Java and JavaScript</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Java</th>
+<th>JavaScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Execution</strong></td>
+<td>Compiled</td>
+<td>Interpreted</td>
+</tr>
+<tr>
+<td><strong>Typing</strong></td>
+<td>Static typing</td>
+<td>Dynamic typing</td>
+</tr>
+<tr>
+<td><strong>Variable Typing</strong></td>
+<td>Strong</td>
+<td>Weak</td>
+</tr>
+<tr>
+<td><strong>Hash Tables</strong></td>
+<td>Provided by libraries</td>
+<td>Native type</td>
+</tr>
+<tr>
+<td><strong>Object Model</strong></td>
+<td>Class-based</td>
+<td>Prototype-based</td>
+</tr>
+<tr>
+<td><strong>Verbosity</strong></td>
+<td>More verbose</td>
+<td>Less verbose: <br> - No need for class declarations <br> - No need for separate files</td>
+</tr>
+</tbody>
+</table>
+<h2 id="similarities-between-java-and-javascript">Similarities Between Java and JavaScript</h2>
+<ul>
+<li>Cross-platform support</li>
+<li>(Almost) everything is an object</li>
+<li>Garbage-collected automatic memory management</li>
+<li>Use of braces <code>{ }</code> to delimit blocks of code</li>
+<li>Use of semicolons <code>;</code> to terminate statements</li>
+</ul>
+<h2 id="object-models">Object Models</h2>
+<ul>
+<li>
+<p><strong>Java - Class-Based:</strong></p>
+<ul>
+<li>Static typing</li>
+<li>Type safety</li>
+<li>Class inheritance</li>
+</ul>
+</li>
+<li>
+<p><strong>JavaScript - Prototype-Based:</strong></p>
+<ul>
+<li>Dynamic typing</li>
+<li>Enables inheritance from any other object</li>
+</ul>
+</li>
+</ul>
+<h2 id="javascript-usage-paradigms">JavaScript Usage Paradigms</h2>
+<ul>
+<li>
+<p><strong>Server-side</strong>: Node.js applications</p>
+</li>
+<li>
+<p><strong>Client-side</strong>:</p>
+<ul>
+<li>Web browsers</li>
+<li>Mobile apps</li>
+</ul>
+</li>
+</ul>
+<h2 id="document-object-model-dom">Document Object Model (DOM)</h2>
+<ul>
+<li>API for HTML and XML documents</li>
+<li>Represents the page as a tree-like structure</li>
+<li>Enables and simplifies dynamic content in web pages and other mobile contents</li>
+</ul>
+<h2 id="variable-typing">Variable Typing</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">boolean</span> x = <span class="hljs-keyword">true</span>;
+<span class="hljs-keyword">int</span> x = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">float</span> x = <span class="hljs-number">2.5</span>;
+String x = <span class="hljs-keyword">new</span> String(“s”); List x;
+Hashtable x;
+Complex x;
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> x = True;
+<span class="hljs-keyword">var</span> x = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">var</span> x = <span class="hljs-number">2.5</span>;
+<span class="hljs-keyword">var</span> x = <span class="hljs-string">'s'</span>;
+<span class="hljs-keyword">var</span> x = [<span class="hljs-number">1</span>, <span class="hljs-string">'2'</span>, [<span class="hljs-number">3.5</span>, <span class="hljs-number">4</span>], <span class="hljs-number">5</span>];
+<span class="hljs-keyword">var</span> x = {};
+<span class="hljs-comment">// not available natively</span>
+</div></code></pre>
+<h2 id="native-primitive-types">Native Primitive Types</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Java</th>
+<th>JavaScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Boolean</strong></td>
+<td><code>boolean</code> (true, false)</td>
+<td><code>boolean</code> (true, false)</td>
+</tr>
+<tr>
+<td><strong>Integers</strong></td>
+<td><code>short</code>, <code>int</code>, <code>long</code> (+ unsigned types)</td>
+<td>Not available (all numbers are floating-point)</td>
+</tr>
+<tr>
+<td><strong>Floating-Point</strong></td>
+<td><code>float</code>, <code>double</code></td>
+<td>Equivalent to <code>double</code></td>
+</tr>
+<tr>
+<td><strong>Characters/Strings</strong></td>
+<td><code>char</code>, <code>char[]</code></td>
+<td>Strings are equivalent to <code>char[]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="native-classobject-types">Native Class/Object Types</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Java</th>
+<th>JavaScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Class System</strong></td>
+<td>Uses actual classes with a strict hierarchy</td>
+<td>No actual classes, uses constructor functions</td>
+</tr>
+<tr>
+<td><strong>Base of Hierarchy</strong></td>
+<td><code>Object</code></td>
+<td><code>Object</code></td>
+</tr>
+<tr>
+<td><strong>Native Classes/Types</strong></td>
+<td><code>Integer</code>, <code>Float</code>, <code>String</code>, <code>Array</code>, <code>List</code>, <code>Map</code></td>
+<td><code>Object</code>, <code>Array</code>, <code>Date</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="primitive-vs-object-types-in-javascript">Primitive vs. Object Types in JavaScript</h2>
+<p><strong>Primitive</strong></p>
+<ul>
+<li><strong>Copy Semantics</strong>:
+<ul>
+<li>Passing primitive values creates a copy of the actual value.</li>
+</ul>
+</li>
+<li><strong>Auto-Boxing</strong>:
+<ul>
+<li>Can be used anywhere an object is required.</li>
+<li>The interpreter creates a temporary object and fills it with the value of the primitive type when needed.</li>
+<li>Example: <code>(3.14).toString();</code> works because of auto-boxing.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Object</strong></p>
+<ul>
+<li><strong>Reference-Copy Semantics</strong>:
+<ul>
+<li>Passing objects creates a copy of the reference to the object (not the actual object itself).</li>
+</ul>
+</li>
+<li><strong>Object-Declaration Syntax</strong>:
+<ul>
+<li><code>var o = new Object();</code></li>
+<li><code>var o = {};</code> (Object Literal Syntax: <code>{ key: val, ... }</code>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="special-pointers">Special Pointers</h2>
+<table>
+<thead>
+<tr>
+<th>Pointer Type</th>
+<th>Java</th>
+<th>JavaScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Invalid/ &quot;Null&quot; Pointer</td>
+<td><code>null</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>Object Non-existence</td>
+<td><code>null</code> (typically used)</td>
+<td><code>undefined</code></td>
+</tr>
+<tr>
+<td>Current Object</td>
+<td><code>this</code></td>
+<td><code>this</code> <br> <em>(The value of <code>this</code> depends on how a function is called.)</em></td>
+</tr>
+<tr>
+<td></td>
+<td><code>this.value = null;</code></td>
+<td><code>this.value = null;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="strong-vs-weak-typing">Strong vs. Weak Typing</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> x = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">if</span> (x == <span class="hljs-string">'5'</span>)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'True'</span>);
+<span class="hljs-comment">//==&gt; True</span>
+</div></code></pre>
+<h2 id="block-scoping">Block Scoping</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (x &lt; y) { ... } <span class="hljs-keyword">else</span> { ... }
+<span class="hljs-keyword">if</span> (y == z) {
+   conditional1();
+   conditional2();
+}
+common();
+</div></code></pre>
+<h2 id="variable-declarations-and-scoping">Variable Declarations and Scoping</h2>
+<ul>
+<li>
+<p><strong><code>var</code></strong> applies to an entire function</p>
+<ul>
+<li>
+<p>The variable can be accessed even before declaration with value <code>undefined</code></p>
+<pre class="hljs"><code><div>y = <span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">if</span> (x) {
+    <span class="hljs-keyword">var</span> y;
+}
+
+<span class="hljs-built_in">console</span>.log(y);
+</div></code></pre>
+<p>//==&gt; Console outputs 1</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>let</code></strong> is limited in scope to the current block like Java variables</p>
+<ul>
+<li><code>if (x) { let y = 1; } console.log(y);</code> //==&gt; ReferenceError: y is not defined</li>
+</ul>
+</li>
+<li>
+<p><strong><code>const</code></strong> does not allow any further assignments</p>
+<ul>
+<li><code>const x = 1; x = 2;</code> //==&gt; TypeError: Assignment to constant variable</li>
+</ul>
+</li>
+</ul>
+<h2 id="determining-the-type-of-a-variable">Determining the Type of a Variable</h2>
+<p><strong><code>typeof</code></strong> operator returns a string indicating the type</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-string">"Ralf"</span>);         <span class="hljs-comment">// "string"</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-number">3.14</span>);           <span class="hljs-comment">// "number"</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">false</span>);          <span class="hljs-comment">// "boolean"</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]);         <span class="hljs-comment">// "object"</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());     <span class="hljs-comment">// "object"</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span>);           <span class="hljs-comment">// "object" (backward compat with old JS)</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{});  <span class="hljs-comment">// "function"</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>);      <span class="hljs-comment">// "undefined"</span>
+</div></code></pre>
+<h2 id="library-import">Library Import</h2>
+<p>Java</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// import a single library</span>
+<span class="hljs-keyword">import</span> library;
+
+<span class="hljs-comment">// import multiple libraries</span>
+<span class="hljs-keyword">import</span> library.*;
+</div></code></pre>
+<p>JavaScript</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// insert all of a module's exports into namespace name</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> name <span class="hljs-keyword">from</span> <span class="hljs-string">'mod'</span>;
+
+<span class="hljs-comment">// insert specified export into current scope</span>
+<span class="hljs-keyword">import</span> { exp } <span class="hljs-keyword">from</span> <span class="hljs-string">'mod'</span>;
+
+<span class="hljs-comment">// insert an export under an alias</span>
+<span class="hljs-keyword">import</span> { exp <span class="hljs-keyword">as</span> alias } <span class="hljs-keyword">from</span> <span class="hljs-string">'mod'</span>;
+</div></code></pre>
+<h2 id="equality-tests">Equality Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Equality Test</th>
+<th>Java</th>
+<th>JavaScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Object (Strict) Identity</td>
+<td><code>==</code></td>
+<td><code>===</code> (no type coercion)</td>
+</tr>
+<tr>
+<td>Value Equality</td>
+<td><code>.equals()</code> (method-based)</td>
+<td><code>==</code> (with type coercion if needed)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="function-declaration">Function Declaration</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">funcname</span> (<span class="hljs-params">argname, ...</span>) </span>{
+  <span class="hljs-keyword">var</span> result = X;
+  <span class="hljs-comment">// body</span>
+  <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<h2 id="class-declaration">Class Declaration</h2>
+<p>Java</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">cl</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">X</span> </span>{
+    type data = defvalue;
+    <span class="hljs-function">type <span class="hljs-title">func</span><span class="hljs-params">(type N)</span> </span>{ 
+        <span class="hljs-keyword">return</span> N * data;
+    }
+}
+</div></code></pre>
+<p>JavaScript</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyClass</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">this</span>.__proto__ = X;
+  <span class="hljs-keyword">this</span>.data = defvalue;
+  <span class="hljs-keyword">this</span>.func = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>{
+    <span class="hljs-keyword">return</span> N * <span class="hljs-keyword">this</span>.data;
+  };
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Car</span> </span>{
+  <span class="hljs-keyword">constructor</span>(make, model, year) {
+    <span class="hljs-keyword">this</span>.make = make;
+    <span class="hljs-keyword">this</span>.model = model;
+    <span class="hljs-keyword">this</span>.year = year;
+  }
+
+  start() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"The car is starting."</span>);
+  }
+
+  stop() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"The car is stopping."</span>);
+  }
+}
+
+<span class="hljs-comment">// Create an instance of the Car class</span>
+<span class="hljs-keyword">const</span> myCar = <span class="hljs-keyword">new</span> Car(<span class="hljs-string">"Toyota"</span>, <span class="hljs-string">"Camry"</span>, <span class="hljs-number">2023</span>);
+
+<span class="hljs-comment">// Access properties</span>
+<span class="hljs-built_in">console</span>.log(myCar.make); <span class="hljs-comment">// Output: "Toyota"</span>
+<span class="hljs-built_in">console</span>.log(myCar.model); <span class="hljs-comment">// Output: "Camry"</span>
+<span class="hljs-built_in">console</span>.log(myCar.year); <span class="hljs-comment">// Output: 2023</span>
+
+<span class="hljs-comment">// Call methods</span>
+myCar.start(); <span class="hljs-comment">// Output: "The car is starting."</span>
+myCar.stop(); <span class="hljs-comment">// Output: "The car is stopping."</span>
+</div></code></pre>
+<h2 id="accessing-class-members">Accessing Class Members</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> foo = <span class="hljs-keyword">new</span> MyClass();
+
+<span class="hljs-keyword">var</span> d1 = foo.data;
+<span class="hljs-keyword">var</span> d2 = foo.func(X);
+<span class="hljs-keyword">var</span> v = foo.fact(<span class="hljs-number">5</span>);
+</div></code></pre>
+<h2 id="exception-handling">Exception Handling</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">E</span>(<span class="hljs-params"></span>) </span>{ ... }
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> E();
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">try</span> {
+    foo();
+  } <span class="hljs-keyword">catch</span> (exc_var) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Err"</span>);
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Always"</span>);
+  }
+  <span class="hljs-keyword">return</span>;
+}
+</div></code></pre>
+<h2 id="flow-control">Flow Control</h2>
+<pre class="hljs"><code><div><span class="hljs-comment">// Conditional statements</span>
+<span class="hljs-keyword">if</span> (COND1) {
+  block1;
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (COND2) {
+  block2;
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (COND3) {
+  block3;
+} <span class="hljs-keyword">else</span> {
+  block4;
+}
+
+<span class="hljs-comment">// While loops</span>
+<span class="hljs-keyword">while</span> (COND) {
+  block;
+}
+
+<span class="hljs-keyword">do</span> {
+  block;
+} <span class="hljs-keyword">while</span> (COND);
+
+<span class="hljs-comment">// For loops</span>
+<span class="hljs-keyword">for</span> (INIT; COND; UPDATE) {
+  block;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> V <span class="hljs-keyword">of</span> ARRAY) {
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> PROP <span class="hljs-keyword">in</span> OBJ) {
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-comment">// Switch statements</span>
+<span class="hljs-keyword">switch</span> (EXPR) {
+  <span class="hljs-keyword">case</span> X:
+    <span class="hljs-comment">// ...</span>
+  <span class="hljs-keyword">default</span>:
+    <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-comment">// Within-loop control</span>
+<span class="hljs-keyword">break</span>; <span class="hljs-comment">// end loop</span>
+<span class="hljs-keyword">continue</span>; <span class="hljs-comment">// skip to next iteration</span>
+</div></code></pre>
+<h2 id="python-like-features">Python-Like Features</h2>
+<p>Python</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># multiple assignment</span>
+a, b = x, y
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">// "destructuring" assignment</span>
+<span class="hljs-keyword">var</span> [a, b] = [x, y];
+
+<span class="hljs-keyword">var</span> { a, b } = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">2</span> };
+
+<span class="hljs-comment">// with renaming</span>
+<span class="hljs-keyword">var</span> { <span class="hljs-attr">a</span>: foo, <span class="hljs-attr">b</span>: bar } = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">2</span> };
+<span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">//==&gt; 1</span>
+
+<span class="hljs-comment">// with defaults</span>
+<span class="hljs-keyword">var</span> { a = <span class="hljs-number">10</span>, b = <span class="hljs-number">5</span> } = { <span class="hljs-attr">a</span>: <span class="hljs-number">3</span> };
+<span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">//==&gt; 3</span>
+<span class="hljs-built_in">console</span>.log(b); <span class="hljs-comment">//==&gt; 5</span>
+
+<span class="hljs-comment">// separate from declaration</span>
+({ a, b } = {});
+</div></code></pre>
+<h2 id="strings-in-javascript">Strings in JavaScript</h2>
+<ul>
+<li>
+<p>JavaScript strings are sequences of UTF-16 code points</p>
+</li>
+<li>
+<p>Non-printable characters can be specified using backslash escapes as in C or Java:</p>
+<ul>
+<li><code>\0</code>, <code>\n</code>, <code>\xXX</code> (Latin-1 in hex), <code>\uXXXX</code> (Unicode in hex)</li>
+</ul>
+</li>
+<li>
+<p>String literals can be enclosed in single or double quotes</p>
+</li>
+<li>
+<p>Strings (including literals) have attributes and methods:</p>
+<ul>
+<li><code>&quot;hello&quot;.length</code> → <code>5</code></li>
+<li><code>'hello'.charAt(0)</code> → <code>'h'</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Comparison</strong>: <code>&lt;</code> and <code>&gt;</code> can be used to compare strings based on Unicode code points</p>
+</li>
+</ul>
+<h2 id="type-conversions">Type Conversions</h2>
+<ul>
+<li>
+<p><strong>From string to number:</strong></p>
+<ul>
+<li><code>x = Number(string)</code></li>
+<li><code>x = +string</code> (Unary plus can only operate on numbers, so it will implicitly convert its arg)</li>
+</ul>
+</li>
+<li>
+<p><strong>From number to string:</strong></p>
+<ul>
+<li><code>x = String(number)</code></li>
+<li><code>x = (1).toString()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Automatically:</strong></p>
+<ul>
+<li>string + number becomes string + string: &quot;2&quot; + &quot;3&quot; == &quot;23&quot;</li>
+<li>string - number becomes number - number: &quot;8&quot; - 3 == 5</li>
+<li>string * string becomes number * number: &quot;2&quot; * &quot;3&quot; == 6</li>
+</ul>
+</li>
+</ul>
+<h2 id="implicit-type-conversion-%E2%80%93-to-boolean">Implicit Type Conversion – To Boolean</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Boolean Conversion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>numbers</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>false</td>
+</tr>
+<tr>
+<td>Nonzero number</td>
+<td>true</td>
+</tr>
+<tr>
+<td>NaN</td>
+<td>false</td>
+</tr>
+<tr>
+<td>Infinity</td>
+<td>true</td>
+</tr>
+<tr>
+<td><strong>strings</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>&quot;&quot; (Empty string)</td>
+<td>false</td>
+</tr>
+<tr>
+<td>Non-empty string</td>
+<td>true</td>
+</tr>
+<tr>
+<td><strong>Objects</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>null</td>
+<td>false</td>
+</tr>
+<tr>
+<td>undefined</td>
+<td>false</td>
+</tr>
+<tr>
+<td>All other objects</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<h2 id="javascript-arithmetic-operators">JavaScript Arithmetic Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Op</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a + b</code></td>
+<td>addition</td>
+</tr>
+<tr>
+<td><code>a - b</code></td>
+<td>subtraction</td>
+</tr>
+<tr>
+<td><code>a * b</code></td>
+<td>multiplication</td>
+</tr>
+<tr>
+<td><code>a / b</code></td>
+<td>division</td>
+</tr>
+<tr>
+<td><code>a % b</code></td>
+<td>modulus: remainder of a/b</td>
+</tr>
+<tr>
+<td><code>-a</code></td>
+<td>negation</td>
+</tr>
+<tr>
+<td><code>+a</code></td>
+<td>(unary plus) a unchanged</td>
+</tr>
+</tbody>
+</table>
+<h2 id="javascript-mutation-operators">JavaScript Mutation Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Op</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a += b</code></td>
+<td>add b to a (equivalent to <code>a = a + b</code>)</td>
+</tr>
+<tr>
+<td><code>a -= b</code></td>
+<td>subtract b from a (equivalent to <code>a = a - b</code>)</td>
+</tr>
+<tr>
+<td><code>a *= b</code></td>
+<td>multiply a by b (equivalent to <code>a = a * b</code>)</td>
+</tr>
+<tr>
+<td><code>a /= b</code></td>
+<td>divide a by b (equivalent to <code>a = a / b</code>)</td>
+</tr>
+<tr>
+<td><code>a %= b</code></td>
+<td>modulus: remainder of a/b (equivalent to <code>a = a % b</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="javascript-bitwise-operators">JavaScript Bitwise Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Op</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a &amp; b</code></td>
+<td>bitwise AND</td>
+</tr>
+<tr>
+<td><code>a \| b</code></td>
+<td>bitwise OR</td>
+</tr>
+<tr>
+<td><code>a ^ b</code></td>
+<td>bitwise XOR</td>
+</tr>
+<tr>
+<td><code>~a</code></td>
+<td>bitwise NOT</td>
+</tr>
+<tr>
+<td><code>a &lt;&lt; b</code></td>
+<td>left shift</td>
+</tr>
+<tr>
+<td><code>a &gt;&gt; b</code></td>
+<td>arithmetic right shift</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The operators treat the args as 32-bit integers.</li>
+<li>Shifts are modulo 32, meaning the result of the shift operation is wrapped around if it exceeds 32 bits.</li>
+</ul>
+<h2 id="javascript-comparison-operators">JavaScript Comparison Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Op</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a == b</code></td>
+<td>equals (with type conversion)</td>
+</tr>
+<tr>
+<td><code>a === b</code></td>
+<td>equals (without type conversion)</td>
+</tr>
+<tr>
+<td><code>a != b</code></td>
+<td>does not equal</td>
+</tr>
+<tr>
+<td><code>a !== b</code></td>
+<td>not equal (without type conversion)</td>
+</tr>
+<tr>
+<td><code>a &lt; b</code></td>
+<td>less than</td>
+</tr>
+<tr>
+<td><code>a &gt; b</code></td>
+<td>greater than</td>
+</tr>
+<tr>
+<td><code>a &lt;= b</code></td>
+<td>less than or equal</td>
+</tr>
+<tr>
+<td><code>a &gt;= b</code></td>
+<td>greater than or equal</td>
+</tr>
+</tbody>
+</table>
+<h2 id="javascript-boolean-operators">JavaScript Boolean Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Op</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a &amp;&amp; b</code></td>
+<td>both a and b are true</td>
+</tr>
+<tr>
+<td><code>a \|\| b</code></td>
+<td>at least one of a, b is true</td>
+</tr>
+<tr>
+<td><code>!a</code></td>
+<td>a is false</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>&amp;&amp;</code> and <code>||</code> exhibit <strong>short-circuit evaluation</strong>: stop evaluating as soon as the result is determined.
+<ul>
+<li>For <code>&amp;&amp;</code>, if the first operand is false, the result is false, and the second operand is not evaluated.</li>
+<li>For <code>||</code>, if the first operand is true, the result is true, and the second operand is not evaluated.</li>
+</ul>
+</li>
+</ul>
+<h2 id="defining-functions">Defining Functions</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">N</span>) </span>{
+  <span class="hljs-keyword">var</span> L = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>();
+  <span class="hljs-keyword">var</span> a = <span class="hljs-number">0</span>, b = <span class="hljs-number">1</span>, c = <span class="hljs-number">0</span>;
+
+  <span class="hljs-keyword">while</span> (c &lt; N) {
+    <span class="hljs-keyword">var</span> tmp = b;
+    b = a + b;
+    a = tmp;
+    L[c++] = a;
+  }
+
+  <span class="hljs-keyword">return</span> L;
+}
+
+fib(<span class="hljs-number">5</span>); <span class="hljs-comment">// ==&gt; [1, 1, 2, 3, 5]</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">N, a=<span class="hljs-number">0</span>, b=<span class="hljs-number">1</span></span>) </span>{
+  <span class="hljs-keyword">var</span> L = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>();
+  <span class="hljs-keyword">var</span> c = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span> (c &lt; N) {
+    <span class="hljs-keyword">var</span> tmp = b;
+    b = a + b;
+    a = tmp;
+    L[c++] = a;
+  }
+  <span class="hljs-keyword">return</span> L;
+}
+
+fib(<span class="hljs-number">5</span>); <span class="hljs-comment">// ==&gt; [1, 1, 2, 3, 5]</span>
+fib(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">// ==&gt; [2, 2, 4, 6, 10]</span>
+fib(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// ==&gt; [3, 4, 7, 11, 18]</span>
+</div></code></pre>
+<p>Functions can be called with <strong>more</strong> args than declared</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(a, <span class="hljs-built_in">arguments</span>);
+}
+
+foo(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// ==&gt; 1 [1, 2, 3]</span>
+</div></code></pre>
+<p>Collect optional args into an array with the <strong>rest</strong> (<code>...</code>) operator</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span>(<span class="hljs-params">a, ...b</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(a, b);
+}
+
+bar(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// ==&gt; 1 [2, 3]</span>
+</div></code></pre>
+<p>Functions can be called with <strong>fewer</strong> args than declared</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a, b, c</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(a, b, c);
+}
+
+foo(<span class="hljs-number">1</span>); <span class="hljs-comment">// ==&gt; 1 undefined undefined</span>
+</div></code></pre>
+<p>Turn array into separate args with the <strong>spread</strong> (<code>...</code>) operator</p>
+<pre class="hljs"><code><div>a = [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+foo(<span class="hljs-number">1</span>, ...a); <span class="hljs-comment">// ==&gt; 1 2 3</span>
+</div></code></pre>
+
+</body>
+</html>
